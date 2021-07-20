@@ -1,0 +1,35 @@
+
+.page__bd_spacing{
+    padding-top:0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.page__bd{
+    text-align: center;
+}
+
+.imagePlayer{
+    width: 375px;
+    height: 450px;
+    margin: auto;
+}
+
+.camera{
+    width: 375px; 
+    position: absolute;
+}
+
+.canvasWebGL{
+    position: absolute;
+}
+
+.canvas2d {
+    position:fixed;
+    left:1000px;
+}
+
+.hiddenCanvas{
+    position:fixed;
+    left:1000px;
+}
