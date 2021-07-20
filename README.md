@@ -8,6 +8,10 @@
 | -- | -- |
 | 2021-07-21 | New: This project is the same as https://github.com/sanyuered/WeChat-MiniProgram-WebAR, but it is a pure front-end website. |
 
+## Visit a live example
+
+https://sanyuered.github.io/WebAR/
+
 ## Introduction of Web AR 
 
 This is a Web AR Demo. 
