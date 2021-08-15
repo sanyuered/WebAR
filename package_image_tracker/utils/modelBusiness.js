@@ -1,16 +1,18 @@
 // the scale of the model image
-const initScale = 0.29;
-// the position of a track point on a pattern image
+const initScale = 300;
+// a index of a track point on a pattern image
 const trackPoint = {
-    x: 186, // the width of the pattern image is 375
-    y: 140, // the height of the pattern image is 375
+    x: 185, // the width of the pattern image is 375
+    y: 224, // the height of the pattern image is 375
 };
 
 var camera, scene, renderer;
 var mainModel;
 var canvasWidth, canvasHeight;
 
-function initThree(canvasWebGLId, modelUrl, _canvasWidth,
+function initThree(canvasWebGLId,
+    modelUrl,
+    _canvasWidth,
     _canvasHeight) {
     canvasWidth = _canvasWidth;
     canvasHeight = _canvasHeight;
@@ -18,7 +20,6 @@ function initThree(canvasWebGLId, modelUrl, _canvasWidth,
     var canvas_webgl = document.getElementById(canvasWebGLId);
     initScene(canvas_webgl);
     loadModel(modelUrl);
-
 }
 
 function initScene(canvas_webgl) {
@@ -47,40 +48,29 @@ function initScene(canvas_webgl) {
 }
 
 function loadModel(modelUrl) {
-    var loader = new THREE.GLTFLoader();
-    loader.load(modelUrl,
-        function (gltf) {
-            console.log('loadModel', 'success');
-            var model = gltf.scene;
-            model.scale.setScalar(initScale);
-            // save model
-            mainModel = model;
-            scene.add(model);
-        },
-        null,
-        function (error) {
-            console.log('loadModel', error);
-        });
+    const texture1 = new THREE.TextureLoader().load(modelUrl);
+    const material1 = new THREE.MeshBasicMaterial({ map: texture1, transparent: true });
+    const geometry1 = new THREE.PlaneGeometry(1, 1);
+    const plane1 = new THREE.Mesh(geometry1, material1);
+    plane1.scale.setScalar(initScale);
+    mainModel = plane1;
+    scene.add(mainModel);
+    console.log('loadModel', 'success');
 }
 
 function updateModel(modelUrl) {
-    var loader = new THREE.GLTFLoader();
-    loader.load(modelUrl,
-        function (gltf) {
-            console.log('updateModel', 'success');
-            var model = gltf.scene;
-            model.scale.setScalar(initScale);
-            // remove old model
-            scene.remove(mainModel);
-            // save new model
-            mainModel = model;
-            // add new model
-            scene.add(model);
-        },
-        null,
-        function (error) {
-            console.log('updateModel', error);
-        });
+    const texture1 = new THREE.TextureLoader().load(modelUrl);
+    const material1 = new THREE.MeshBasicMaterial({ map: texture1, transparent: true });
+    const geometry1 = new THREE.PlaneGeometry(1, 1);
+    const plane1 = new THREE.Mesh(geometry1, material1);
+    plane1.scale.setScalar(initScale);
+    // remove old model
+    scene.remove(mainModel);
+    // save new model
+    mainModel = plane1;
+    // add new model
+    scene.add(mainModel);
+    console.log('updateModel', 'success');
 }
 
 function setSize() {
@@ -103,30 +93,43 @@ function setModel(prediction,
         setSize();
     }
 
-    // console.log('prediction', prediction);
+    console.log('prediction', prediction);
 
     if (!mainModel) {
         console.log('setModel', '3d model is not loaded.');
         return;
     }
+    
     var transform = prediction.transform.data;
-
     // position
     var target = getTranslation(transform,
         trackPoint.x,
         trackPoint.y);
-    mainModel.position.set(target._x - canvasWidth / 2,
-        canvasHeight / 2 - target._y,
-        0);
+    mainModel.position.set(target._x - canvasWidth / 2,canvasHeight / 2 - target._y, 0);
 
     // rotation
     var r = getRotationAndScale(transform);
+    // convert array to rotation matrix
     var rotationMatrix = new THREE.Matrix4();
     rotationMatrix.fromArray(r.rotation);
     mainModel.rotation.setFromRotationMatrix(rotationMatrix);
+
     // scale
     mainModel.scale.setScalar(initScale * r.scale);
+}
 
+function setModelOnDefaultposition() {
+    if (!mainModel) {
+        console.log('setModel', '3d model is not loaded.');
+        return;
+    }
+
+    // position
+    mainModel.position.set(0, 0, 0);
+    // rotation
+    mainModel.material.rotation = 0;
+    // scale
+    mainModel.scale.setScalar(initScale * 0.65);
 }
 
 function getTranslation(td, x, y) {
@@ -199,4 +202,7 @@ export {
     initThree,
     updateModel,
     setModel,
+    setModelOnDefaultposition,
+    getTranslation,
+    getRotationAndScale,
 }

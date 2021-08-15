@@ -8,26 +8,23 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="Pragram" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>Image Detecting and 3D Mask</title>
+  <title>Image Detecting and Video Mask</title>
   <link rel="stylesheet" href="../../style/weui.css">
   <link rel="stylesheet" href="../../style/app.css">
-  <link rel="stylesheet" href="photo.css?v3">
+  <link rel="stylesheet" href="camera.css?v1">
 </head>
 
 <body>
   <div id="app" class="page">
-    <div class="imagePlayer">
-      <img id="inputData" src="../../assets/sample.jpg" class="camera">
-    </img>
-      <canvas id="canvasWebGL" class="camera">
-      </canvas>
+    <div class="videoPlayer">
+      <video id="inputData" autoplay muted playsinline webkit-playsinline class="camera">
+      </video>
+      <video id="videoMask" class="videoMask" loop crossOrigin="anonymous" playsinline webkit-playsinline>
+        <source id="videoMaskSource" />
+      </video>
     </div>
-
     <div class="page__bd page__bd_spacing">
-      <div>A input image:</div>
-      <input id="uploaderInput" type="file" accept="image/*">
-      <a href="javascript:" class="weui-btn weui-btn_primary marginTop10" 
-        v-bind:class="{'weui-btn_disabled':isButtonDisabled}"
+      <a href="javascript:" class="weui-btn weui-btn_primary" v-bind:class="{'weui-btn_disabled':isButtonDisabled}"
         v-on:click="takePhoto">Detect</a>
       <div v-text="notice"></div>
       <div class="marginTop10">Pattern Image:</div>
@@ -51,16 +48,14 @@
   </div>
 
 
-  <!-- 3D -->
-  <script src="../../third_party/three.js"></script>
   <!-- vue -->
   <script src="../../third_party/vue.min.js"></script>
   <!-- image process -->
   <script src="../../third_party/jsfeat.js"></script>
   <script src="../../third_party/tracking.js"></script>
 
-  <script src="../utils/ImageTracker.js?v2"></script>
-  <script type="module" src="photo.js?v5"></script>
+  <script src="../utils/ImageTracker.js?v5"></script>
+  <script type="module" src="camera.js?v6"></script>
 </body>
 
 </html>
