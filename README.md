@@ -6,6 +6,7 @@
 
 | Date　　　| Update |
 | -- | -- |
+| 2021-08-15 | New: Added a video mask mode for image AR. This is a CSS 3D transformation, which does not require three.js. |
 | 2021-07-21 | New: This project is the same as https://github.com/sanyuered/WeChat-MiniProgram-WebAR, but it is a pure front-end website. |
 
 ## Visit a live example
@@ -26,7 +27,7 @@ Index Page of the WeChat Mini-program
 
 ![avatar](screenshot/index.jpg)
 
-## Image AR
+## Image AR and 3D Mask
 
 Use the demo to scan a pattern image below. 
 
@@ -44,7 +45,17 @@ A effect of rotating.
 
 ![avatar](screenshot/1-3.jpg)
 
-## How to replace the 3d model "sun glass" 
+## Image AR and Video Mask
+
+Use the demo to scan a rotating image below. 
+
+![avatar](screenshot/4-1.jpg)
+
+A video player is on and aligned with the image.
+
+![avatar](screenshot/4-2.jpg)
+
+## How to replace the 2D mask "cat beard" 
 
 You may replace the default url of a image for 2D mask.
 
@@ -52,8 +63,7 @@ File: /package_image_tracker/photo/photo.js and
 /package_image_tracker/camera/camera.js
 
 ```javascript
-// a url of a gltf model
-const modelUrl = '../../assets/sunglass.glb';
+const modelUrl = '../../assets/cat_beard.png';
 ```
 
 ## How to replace the pattern image
