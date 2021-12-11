@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Pragram" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Image Detecting using OpenCV</title>
+  <link rel="stylesheet" href="../../style/weui.css">
+  <link rel="stylesheet" href="../../style/app.css">
+  <link rel="stylesheet" href="photo.css?v4">
+</head>
+
+<body>
+  <div id="app" class="page">
+    <div class="imagePlayer">
+      <img id="inputData" src="../../assets/sample.jpg" class="camera">
+      </img>
+      <canvas id="canvasWebGL" class="camera">
+      </canvas>
+    </div>
+
+    <div class="page__bd page__bd_spacing">
+      <div>The Input Image:</div>
+      <input id="uploaderInput" type="file" accept="image/*">
+      <a href="javascript:" class="weui-btn weui-btn_primary marginTop10"
+        v-bind:class="{'weui-btn_disabled':isButtonDisabled}" v-on:click="takePhoto">Detect</a>
+      <div v-text="notice"></div>
+      <div class="marginTop10">The Pattern Image:</div>
+      <img id="patternImage" v-bind:src="patternImageUrl"></img>
+    </div>
+
+    <canvas id="canvas2d" class="canvas2d" width="375" height="500"></canvas>
+    <canvas id="hiddenCanvas" class="hiddenCanvas" width="3000" height="2000"></canvas>
+
+    <!-- loading toast -->
+    <div v-show="isShowLoadingToast">
+      <div class="weui-mask_transparent"></div>
+      <div class="weui-toast">
+        <span class="weui-primary-loading weui-icon_toast">
+          <span class="weui-primary-loading__dot"></span>
+        </span>
+        <p class="weui-toast__content">Loading...</p>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- 3D -->
+  <script src="../../third_party/three.js"></script>
+  <!-- vue -->
+  <script src="../../third_party/vue.min.js"></script>
+  <!-- image process -->
+  <script>
+    // wasm路径（相对于assets/opencv_exec.js的文件位置）
+    window.wasm_url = "../assets/opencv3.4.16.wasm";
+  </script>
+  <!-- opencv_exec.js会从window.wasm_url获取wasm路径 -->
+  <script src="../assets/opencv_exec.js"></script>
+
+  <script type="module" src="photo.js?v8"></script>
+</body>
+
+</html>

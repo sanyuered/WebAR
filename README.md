@@ -6,6 +6,7 @@
 
 | Date　　　| Update |
 | -- | -- |
+| 2021-12-11 | New: Added a Image Tracker using OpenCV WebAssembly. Please see the "Image AR using OpenCV". |
 | 2021-08-15 | New: Added a video mask mode for image AR. This is a CSS 3D transformation, which does not require three.js. |
 | 2021-07-21 | New: This project is the same as https://github.com/sanyuered/WeChat-MiniProgram-WebAR, but it is a pure front-end website. |
 
@@ -44,6 +45,18 @@ A effect of translating and scaling.
 A effect of rotating.
 
 ![avatar](screenshot/1-3.jpg)
+
+## Image AR using OpenCV
+
+This is the same as above. Supports image rotation.
+
+The image is rotated by 30 degrees.
+
+![avatar](screenshot/5-1.jpg)
+
+The image is rotated by 90 degrees.
+
+![avatar](screenshot/5-2.jpg)
 
 ## Image AR and Video Mask
 
